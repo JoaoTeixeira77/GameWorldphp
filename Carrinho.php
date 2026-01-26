@@ -81,7 +81,7 @@ finalizarCompra();
 <header>
   <h1>O Meu Carrinho</h1>
   <nav>
-    <a href="Carrinho.html">Carrinho</a>
+    <a href="Carrinho.php">Carrinho</a>
   </nav>
 </header>
 
@@ -119,4 +119,5 @@ finalizarCompra();
 </footer>
 </body>
 </html>
+
 
