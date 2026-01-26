@@ -1,23 +1,66 @@
 <?php
 session_start();
 
-// Exemplo: adicionar itens ao carrinho
-if (!isset($_SESSION['carrinho'])) {
-    $_SESSION['carrinho'] = [
-        'Jogo 1' => 29.99,
-        'Jogo 2' => 49.90
-    ];
+// Função para adicionar produto ao carrinho
+function adicionarAoCarrinho($nome, $preco) {
+    if (!isset($_SESSION['carrinho'])) {
+        $_SESSION['carrinho'] = [];
+    }
+
+    if (isset($_SESSION['carrinho'][$nome])) {
+        $_SESSION['carrinho'][$nome]['quantidade'] += 1;
+    } else {
+        $_SESSION['carrinho'][$nome] = [
+            'preco' => $preco,
+            'quantidade' => 1
+        ];
+    }
+}
+
+// Função para calcular o total do carrinho
+function calcularTotal() {
+    $total = 0;
+    if (isset($_SESSION['carrinho'])) {
+        foreach ($_SESSION['carrinho'] as $item) {
+            $total += $item['preco'] * $item['quantidade'];
+        }
+    }
+    return $total;
+}
+
+// Função para gerar a lista do carrinho em HTML
+function listarCarrinho() {
+    if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho'])) {
+        echo "<li>O carrinho está vazio.</li>";
+        return;
+    }
+
+    foreach ($_SESSION['carrinho'] as $nome => $item) {
+        echo "<li>{$nome} - {$item['quantidade']} x " . number_format($item['preco'], 2) . " € = " . number_format($item['preco'] * $item['quantidade'], 2) . " €</li>";
+    }
+}
+
+// Função para finalizar compra
+function finalizarCompra() {
+    if (isset($_POST['finalizar'])) {
+        if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho'])) {
+            echo "<script>alert('O carrinho está vazio!');</script>";
+        } else {
+            $_SESSION['carrinho'] = [];
+            echo "<script>alert('Compra finalizada com sucesso!'); window.location='".$_SERVER['PHP_SELF']."';</script>";
+        }
+    }
+}
+
+// Adicionar produto via GET (exemplo: ?add=Jogo1&preco=29.99)
+if (isset($_GET['add']) && isset($_GET['preco'])) {
+    $nome = htmlspecialchars($_GET['add']);
+    $preco = floatval($_GET['preco']);
+    adicionarAoCarrinho($nome, $preco);
 }
 
 // Finalizar compra
-if (isset($_POST['finalizar'])) {
-    if (!empty($_SESSION['carrinho'])) {
-        $_SESSION['carrinho'] = []; // Limpa carrinho
-        $mensagem = "Compra finalizada com sucesso!";
-    } else {
-        $mensagem = "O carrinho está vazio!";
-    }
-}
+finalizarCompra();
 ?>
 <!DOCTYPE html>
 <html lang="pt-PT">
@@ -36,33 +79,44 @@ if (isset($_POST['finalizar'])) {
 </head>
 <body>
 <header>
-    <h1>O Meu Carrinho</h1>
-    <nav>
-        <a href="carrinho.php">Carrinho</a>
-    </nav>
+  <h1>O Meu Carrinho</h1>
+  <nav>
+    <a href="Carrinho.html">Carrinho</a>
+  </nav>
 </header>
 
 <section style="text-align:center;padding:40px;">
-    <ul>
-        <?php 
-        $total = 0;
-        if (!empty($_SESSION['carrinho'])) {
-            foreach ($_SESSION['carrinho'] as $nome => $preco) {
-                echo "<li>$nome - " . number_format($preco, 2) . " €</li>";
-                $total += $preco;
-            }
-        }
-        ?>
-    </ul>
-    <p>Total: <?php echo number_format($total, 2); ?> €</p>
-    <form method="post">
-        <button type="submit" name="finalizar">Finalizar Compra</button>
-    </form>
-    <?php if (isset($mensagem)) echo "<p>$mensagem</p>"; ?>
+  <ul id="listaCarrinho"></ul>
+  <p id="totalCarrinho">Total: 0.00 €</p>
+  <button onclick="finalizarCompra()">Finalizar Compra</button>
 </section>
+
+  <!-- Pagamento -->
+  <section class="section" id="pagamento">
+    <h2>Pagamento Seguro</h2>
+    <p>Escolha o seu método de pagamento preferido. Transações 100% seguras!</p>
+    <div class="payment-methods">
+      <div class="payment-card">
+        <img src="PayPal.JPG" alt="PayPal">
+        <h3>PayPal</h3>
+        <button onclick="alert('Redirecionando para PayPal...')">Pagar com PayPal</button>
+      </div>
+      <div class="payment-card">
+        <img src="Credito_debito.JPG" alt="Cartão">
+        <h3>Cartão de Crédito / Débito</h3>
+        <button onclick="alert('Pagamento por cartão em desenvolvimento!')">Pagar com Cartão</button>
+      </div>
+      <div class="payment-card">
+        <img src="MBWAY.JPG" alt="MB Way">
+        <h3>MB Way</h3>
+        <button onclick="alert('Pagamento MB Way em desenvolvimento!')">Pagar com MB Way</button>
+      </div>
+    </div>
+  </section>
 
 <footer>
     <p>&copy; 2026 GameWorld</p>
 </footer>
 </body>
 </html>
+
