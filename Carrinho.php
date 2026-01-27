@@ -1,6 +1,27 @@
 <?php
 session_start();
 
+// Inicializa carrinho
+if (!isset($_SESSION['carrinho'])) {
+    $_SESSION['carrinho'] = [];
+}
+
+// Listar carrinho (equivale ao for do JS)
+function listarCarrinho() {
+    $total = 0;
+
+    if (empty($_SESSION['carrinho'])) {
+        echo "<li>O carrinho está vazio.</li>";
+        return 0;
+    }
+
+    foreach ($_SESSION['carrinho'] as $nome => $preco) {
+        echo "<li>$nome - " . number_format($preco, 2) . " €</li>";
+        $total += $preco;
+    }
+
+    return $total;
+}
 
 // Finalizar compra (equivale ao localStorage.clear)
 function finalizarCompra() {
@@ -16,6 +37,9 @@ function finalizarCompra() {
 
 // Executa finalizar
 finalizarCompra();
+
+// Executa listar
+listaCarrinho();
 ?>
 
 <!DOCTYPE html>
@@ -294,6 +318,7 @@ footer p {
 </footer>
 </body>
 </html>
+
 
 
 
