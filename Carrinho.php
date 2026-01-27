@@ -1,8 +1,18 @@
 <?php
 session_start();
 
+/* ================= FUNÇÕES DO CARRINHO ================= */
+
+// Inicializa o carrinho se não existir
+function iniciarCarrinho() {
+    if (!isset($_SESSION['carrinho'])) {
+        $_SESSION['carrinho'] = [];
+    }
+}
+
+// Lista os produtos do carrinho
 function listarCarrinho() {
-    if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho'])) {
+    if (empty($_SESSION['carrinho'])) {
         echo "<li>O carrinho está vazio.</li>";
         return;
     }
@@ -16,25 +26,46 @@ function listarCarrinho() {
     }
 }
 
+// Calcula o total
 function calcularTotal() {
     $total = 0;
-    if (isset($_SESSION['carrinho'])) {
-        foreach ($_SESSION['carrinho'] as $item) {
-            $total += $item['preco'] * $item['quantidade'];
-        }
+    foreach ($_SESSION['carrinho'] as $item) {
+        $total += $item['preco'] * $item['quantidade'];
     }
     return $total;
 }
 
+// Finaliza a compra
 function finalizarCompra() {
     if (isset($_POST['finalizar'])) {
-        if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho'])) {
+        if (empty($_SESSION['carrinho'])) {
             echo "<script>alert('O carrinho está vazio!');</script>";
         } else {
             $_SESSION['carrinho'] = [];
             echo "<script>alert('Compra finalizada com sucesso!');</script>";
         }
     }
+}
+
+// (Exemplo) Adicionar produto ao carrinho
+function adicionarAoCarrinho($nome, $preco) {
+    iniciarCarrinho();
+
+    if (isset($_SESSION['carrinho'][$nome])) {
+        $_SESSION['carrinho'][$nome]['quantidade']++;
+    } else {
+        $_SESSION['carrinho'][$nome] = [
+            'preco' => $preco,
+            'quantidade' => 1
+        ];
+    }
+}
+
+/* ================= EXECUÇÃO ================= */
+
+// Exemplo: adicionar produtos por GET
+if (isset($_GET['add']) && isset($_GET['preco'])) {
+    adicionarAoCarrinho($_GET['add'], floatval($_GET['preco']));
 }
 
 // Finalizar compra
@@ -65,9 +96,15 @@ finalizarCompra();
 </header>
 
 <section style="text-align:center;padding:40px;">
-  <ul id="listaCarrinho"></ul>
-  <p id="totalCarrinho">Total: 0.00 €</p>
-  <button onclick="finalizarCompra()">Finalizar Compra</button>
+    <ul>
+        <?php listarCarrinho(); ?>
+    </ul>
+
+    <p>Total: <?php echo number_format(calcularTotal(), 2); ?> €</p>
+
+    <form method="post">
+        <button type="submit" name="finalizar">Finalizar Compra</button>
+    </form>
 </section>
 
   <!-- Pagamento -->
@@ -94,11 +131,8 @@ finalizarCompra();
   </section>
 
 <footer>
-  <p>&copy; 2025 GameWorld</p>
-</footer>
-
-<footer>
     <p>&copy; 2026 GameWorld</p>
 </footer>
 </body>
 </html>
+
