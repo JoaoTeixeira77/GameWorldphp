@@ -109,6 +109,7 @@ if (isset($_POST['login'])) {
     <h1>Minha Conta</h1>
     <nav>
         <a href="Minha_Conta.php">Minha Conta</a>
+		<a href="index.php">Início</a>
     </nav>
 </header>
 
