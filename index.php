@@ -8,9 +8,200 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GameWorld</title>
   <style>
-    /* Aqui vai todo o CSS que você já colocou */
-    body { font-family: 'Poppins', Arial, sans-serif; margin:0; padding:0; background:#0f1419; color:#eee; line-height:1.6; }
-    /* resto do CSS... */
+    /* Reset e estrutura geral */
+body {
+  font-family: 'Poppins', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #0f1419; /* fundo mais escuro estilo loja gamer */
+  color: #eee;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
+}
+
+/* Cabeçalho e navegação */
+header {
+  background: linear-gradient(135deg, #1b1f24, #232931);
+  color: #fff;
+  padding: 25px 0;
+  text-align: center;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.4em;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #00b4d8;
+}
+
+nav {
+  background: #121417;
+  text-align: center;
+  padding: 15px 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+
+nav a {
+  color: #fff;
+  margin: 0 20px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s, transform 0.2s;
+  text-transform: uppercase;
+}
+
+nav a:hover {
+  color: #00b4d8;
+  transform: scale(1.1);
+}
+
+/* Banner principal */
+.banner {
+  background: linear-gradient(135deg, #007bff, #00b4d8);
+  color: #fff;
+  text-align: center;
+  padding: 100px 20px;
+  border-bottom: 5px solid #0096c7;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.banner h2 {
+  font-size: 2.6em;
+  margin-bottom: 15px;
+}
+
+.banner p {
+  font-size: 1.2em;
+  opacity: 0.9;
+}
+
+/* Secções gerais */
+.section {
+  padding: 60px 30px;
+  background: #1b1f24;
+  margin: 40px 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  transition: transform 0.3s;
+}
+
+.section:hover {
+  transform: translateY(-5px);
+}
+
+/* Cards de jogos */
+.games {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+.game {
+  background: #232931;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+  width: 250px;
+  text-align: center;
+  padding: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.game:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+}
+
+.game img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.game h3 {
+  font-size: 1.1em;
+  margin: 10px 0;
+  color: #fff;
+}
+
+.game button {
+  background: #00b4d8;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.game button:hover {
+  background: #0077b6;
+  transform: scale(1.05);
+}
+
+/* Formulários e inputs */
+input, select, textarea, button {
+  padding: 10px;
+  margin: 6px 0;
+  width: 100%;
+  border: 1px solid #333;
+  border-radius: 6px;
+  font-family: inherit;
+  background: #111;
+  color: #eee;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #00b4d8;
+  box-shadow: 0 0 6px rgba(0,180,216,0.5);
+  outline: none;
+}
+
+/* Rodapé fixo */
+footer {
+  background: #1b1f24;
+  color: #ccc;
+  text-align: center;
+  font-size: 0.9em;
+  padding: 25px 10px;
+  border-top: 2px solid #00b4d8;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+footer p {
+  margin: 5px 0;
+}
+
+/* Responsividade */
+@media (max-width: 700px) {
+  .games, .payment-methods {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .banner {
+    padding: 70px 15px;
+  }
+
+  nav a {
+    display: inline-block;
+    margin: 10px;
+  }
+}
   </style>
 </head>
 <body>
@@ -82,3 +273,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 </body>
 </html>
+
