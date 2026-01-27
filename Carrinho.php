@@ -1,28 +1,18 @@
 <?php
 session_start();
 
-const lista = document.getElementById("listaCarrinho");
-  let total = 0;
 
-  for (let i = 0; i < localStorage.length; i++) {
-    const nome = localStorage.key(i);
-    const preco = parseFloat(localStorage.getItem(nome));
-    const li = document.createElement("li");
-    li.textContent = `${nome} - ${preco.toFixed(2)} €`;
-    lista.appendChild(li);
-    total += preco;
-  }
-  document.getElementById("totalCarrinho").textContent = `Total: ${total.toFixed(2)} €`;
-
-  function finalizarCompra() {
-    if (localStorage.length === 0) {
-      alert("O carrinho está vazio!");
-    } else {
-      alert("Compra finalizada com sucesso!");
-      localStorage.clear();
-      location.reload();
+// Finalizar compra (equivale ao localStorage.clear)
+function finalizarCompra() {
+    if (isset($_POST['finalizar'])) {
+        if (empty($_SESSION['carrinho'])) {
+            echo "<script>alert('O carrinho está vazio!');</script>";
+        } else {
+            $_SESSION['carrinho'] = [];
+            echo "<script>alert('Compra finalizada com sucesso!');</script>";
+        }
     }
-  }
+}
 
 // Executa finalizar
 finalizarCompra();
@@ -304,6 +294,7 @@ footer p {
 </footer>
 </body>
 </html>
+
 
 
 
