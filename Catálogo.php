@@ -2,11 +2,23 @@
 // Iniciamos a sessão para carrinho
 session_start();
 
-function adicionarCarrinho($nome, $preco){
+// Função para adicionar produto ao carrinho
+function adicionarAoCarrinho($nome, $preco) {
     if (!isset($_SESSION['carrinho'])) {
         $_SESSION['carrinho'] = [];
     }
 
+    if (isset($_SESSION['carrinho'][$nome])) {
+        $_SESSION['carrinho'][$nome]['quantidade'] += 1;
+    } else {
+        $_SESSION['carrinho'][$nome] = [
+            'preco' => $preco,
+            'quantidade' => 1
+        ];
+    }
+}
+
+// Exemplo de carrinho simples
 if (isset($_POST['adicionar'])) {
     $nome = $_POST['nome'];
     $preco = $_POST['preco'];
@@ -103,4 +115,5 @@ $games = [
 </footer>
 </body>
 </html>
+
 
