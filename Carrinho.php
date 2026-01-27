@@ -37,9 +37,6 @@ function finalizarCompra() {
 
 // Executa finalizar
 finalizarCompra();
-
-// Executa listar
-listaCarrinho();
 ?>
 
 <!DOCTYPE html>
@@ -318,6 +315,7 @@ footer p {
 </footer>
 </body>
 </html>
+
 
 
 
