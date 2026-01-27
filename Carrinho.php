@@ -60,6 +60,7 @@ finalizarCompra();
   <h1>O Meu Carrinho</h1>
   <nav>
     <a href="Carrinho.php">Carrinho</a>
+	<a href="index.php">Início</a>
   </nav>
 </header>
 
@@ -93,12 +94,11 @@ finalizarCompra();
   </section>
 
 <footer>
+  <p>&copy; 2025 GameWorld</p>
+</footer>
+
+<footer>
     <p>&copy; 2026 GameWorld</p>
 </footer>
 </body>
 </html>
-
-
-
-
-
