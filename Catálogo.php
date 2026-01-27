@@ -80,6 +80,8 @@ $games = [
   <h1>Catálogo de Jogos</h1>
   <nav>
     <a href="Catálogo.php">Catálogo</a>
+	<a href="Carrinho.php">Carrinho</a>
+	<a href="index.php">Início</a>
   </nav>
 </header>
 
@@ -115,5 +117,3 @@ $games = [
 </footer>
 </body>
 </html>
-
-
