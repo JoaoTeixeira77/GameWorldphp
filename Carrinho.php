@@ -96,15 +96,9 @@ finalizarCompra();
 </header>
 
 <section style="text-align:center;padding:40px;">
-    <ul>
-        <?php listarCarrinho(); ?>
-    </ul>
-
-    <p>Total: <?php echo number_format(calcularTotal(), 2); ?> €</p>
-
-    <form method="post">
-        <button type="submit" name="finalizar">Finalizar Compra</button>
-    </form>
+  <ul id="listaCarrinho"></ul>
+  <p id="totalCarrinho">Total: 0.00 €</p>
+  <button onclick="finalizarCompra()">Finalizar Compra</button>
 </section>
 
   <!-- Pagamento -->
@@ -135,4 +129,3 @@ finalizarCompra();
 </footer>
 </body>
 </html>
-
