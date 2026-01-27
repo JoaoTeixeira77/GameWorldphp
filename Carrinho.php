@@ -1,22 +1,7 @@
 <?php
 session_start();
 
-
-function listarCarrinho() {
-    if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho'])) {
-        echo "<li>O carrinho está vazio.</li>";
-        return;
-    }
-
-    foreach ($_SESSION['carrinho'] as $nome => $item) {
-        echo "<li>$nome - {$item['quantidade']} x "
-           . number_format($item['preco'], 2)
-           . " € = "
-           . number_format($item['preco'] * $item['quantidade'], 2)
-           . " €</li>";
-    }
-}
-
+// Função para calcular o total do carrinho
 function calcularTotal() {
     $total = 0;
     if (isset($_SESSION['carrinho'])) {
@@ -27,17 +12,29 @@ function calcularTotal() {
     return $total;
 }
 
+// Função para gerar a lista do carrinho em HTML
+function listarCarrinho() {
+    if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho'])) {
+        echo "<li>O carrinho está vazio.</li>";
+        return;
+    }
+
+    foreach ($_SESSION['carrinho'] as $nome => $item) {
+        echo "<li>{$nome} - {$item['quantidade']} x " . number_format($item['preco'], 2) . " € = " . number_format($item['preco'] * $item['quantidade'], 2) . " €</li>";
+    }
+}
+
+// Função para finalizar compra
 function finalizarCompra() {
     if (isset($_POST['finalizar'])) {
         if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho'])) {
             echo "<script>alert('O carrinho está vazio!');</script>";
         } else {
             $_SESSION['carrinho'] = [];
-            echo "<script>alert('Compra finalizada com sucesso!');</script>";
+            echo "<script>alert('Compra finalizada com sucesso!'); window.location='".$_SERVER['PHP_SELF']."';</script>";
         }
     }
 }
-
 
 // Finalizar compra
 finalizarCompra();
@@ -99,6 +96,7 @@ finalizarCompra();
 </footer>
 </body>
 </html>
+
 
 
 
