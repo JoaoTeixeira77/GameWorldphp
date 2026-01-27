@@ -1,41 +1,29 @@
 <?php
 session_start();
 
-/* ================= FUNÇÕES DO CARRINHO ================= */
-
-// Inicializa o carrinho se não existir
-function iniciarCarrinho() {
-    if (!isset($_SESSION['carrinho'])) {
-        $_SESSION['carrinho'] = [];
-    }
+// Inicializa carrinho
+if (!isset($_SESSION['carrinho'])) {
+    $_SESSION['carrinho'] = [];
 }
 
-// Lista os produtos do carrinho
+// Listar carrinho (equivale ao for do JS)
 function listarCarrinho() {
+    $total = 0;
+
     if (empty($_SESSION['carrinho'])) {
         echo "<li>O carrinho está vazio.</li>";
-        return;
+        return 0;
     }
 
-    foreach ($_SESSION['carrinho'] as $nome => $item) {
-        echo "<li>$nome - {$item['quantidade']} x "
-           . number_format($item['preco'], 2)
-           . " € = "
-           . number_format($item['preco'] * $item['quantidade'], 2)
-           . " €</li>";
+    foreach ($_SESSION['carrinho'] as $nome => $preco) {
+        echo "<li>$nome - " . number_format($preco, 2) . " €</li>";
+        $total += $preco;
     }
-}
 
-// Calcula o total
-function calcularTotal() {
-    $total = 0;
-    foreach ($_SESSION['carrinho'] as $item) {
-        $total += $item['preco'] * $item['quantidade'];
-    }
     return $total;
 }
 
-// Finaliza a compra
+// Finalizar compra (equivale ao localStorage.clear)
 function finalizarCompra() {
     if (isset($_POST['finalizar'])) {
         if (empty($_SESSION['carrinho'])) {
@@ -47,30 +35,10 @@ function finalizarCompra() {
     }
 }
 
-// (Exemplo) Adicionar produto ao carrinho
-function adicionarAoCarrinho($nome, $preco) {
-    iniciarCarrinho();
-
-    if (isset($_SESSION['carrinho'][$nome])) {
-        $_SESSION['carrinho'][$nome]['quantidade']++;
-    } else {
-        $_SESSION['carrinho'][$nome] = [
-            'preco' => $preco,
-            'quantidade' => 1
-        ];
-    }
-}
-
-/* ================= EXECUÇÃO ================= */
-
-// Exemplo: adicionar produtos por GET
-if (isset($_GET['add']) && isset($_GET['preco'])) {
-    adicionarAoCarrinho($_GET['add'], floatval($_GET['preco']));
-}
-
-// Finalizar compra
+// Executa finalizar
 finalizarCompra();
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
@@ -129,3 +97,4 @@ finalizarCompra();
 </footer>
 </body>
 </html>
+
