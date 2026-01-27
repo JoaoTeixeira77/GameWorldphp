@@ -27,80 +27,75 @@ if (isset($_POST['login'])) {
     <title>Minha Conta - GameWorld</title>
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            background: #000;
-            color: #fff;
-        }
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  background: #000; /* fundo preto */
+  color: #fff; /* texto branco para contraste */
+}
 
-        header, footer {
-            background: #1b1f24;
-            color: #fff;
-            text-align: center;
-            padding: 15px;
-        }
+header, footer {
+  background: #1b1f24;
+  color: #fff;
+  text-align: center;
+  padding: 15px;
+}
 
-        nav {
-            background: #1f252b;
-            text-align: center;
-            padding: 10px;
-        }
+nav {
+  background: #1f252b;
+  text-align: center;
+  padding: 10px;
+}
 
-        nav a {
-            color: #fff;
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
+nav a {
+  color: #fff;
+  margin: 0 15px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
 
-        nav a:hover {
-            color: #00b4d8;
-        }
+nav a:hover {
+  color: #00b4d8;
+}
 
-        section {
-            text-align: center;
-            padding: 50px;
-            background: #0d0d0d;
-            border-radius: 10px;
-            margin: 20px auto;
-            width: 80%;
-            box-shadow: 0 0 10px rgba(0,180,216,0.2);
-        }
+section {
+  text-align: center;
+  padding: 50px;
+  background: #0d0d0d; /* ligeiro contraste com o fundo geral */
+  border-radius: 10px;
+  margin: 20px auto;
+  width: 80%;
+  box-shadow: 0 0 10px rgba(0,180,216,0.2);
+}
 
-        input, button {
-            padding: 10px;
-            margin: 5px;
-            width: 250px;
-            border-radius: 6px;
-            border: 1px solid #333;
-            background: #111;
-            color: #fff;
-            transition: border 0.3s, background 0.3s;
-        }
+input, button {
+  padding: 10px;
+  margin: 5px;
+  width: 250px;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background: #111;
+  color: #fff;
+  transition: border 0.3s, background 0.3s;
+}
 
-        input:focus {
-            border-color: #00b4d8;
-            outline: none;
-        }
+input:focus {
+  border-color: #00b4d8;
+  outline: none;
+}
 
-        button {
-            background: #007bff;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-        }
+button {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
 
-        button:hover {
-            background: #0056b3;
-        }
+button:hover {
+  background: #0056b3;
+}
 
-        .mensagem {
-            margin-top: 15px;
-            color: #00ff00;
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
@@ -177,3 +172,4 @@ if (isset($_POST['login'])) {
 </script>
 </body>
 </html>
+
