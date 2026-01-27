@@ -1,23 +1,22 @@
 <?php
 session_start();
 
-// Função para adicionar produto ao carrinho
-function adicionarAoCarrinho($nome, $preco) {
-    if (!isset($_SESSION['carrinho'])) {
-        $_SESSION['carrinho'] = [];
+
+function listarCarrinho() {
+    if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho'])) {
+        echo "<li>O carrinho está vazio.</li>";
+        return;
     }
 
-    if (isset($_SESSION['carrinho'][$nome])) {
-        $_SESSION['carrinho'][$nome]['quantidade'] += 1;
-    } else {
-        $_SESSION['carrinho'][$nome] = [
-            'preco' => $preco,
-            'quantidade' => 1
-        ];
+    foreach ($_SESSION['carrinho'] as $nome => $item) {
+        echo "<li>$nome - {$item['quantidade']} x "
+           . number_format($item['preco'], 2)
+           . " € = "
+           . number_format($item['preco'] * $item['quantidade'], 2)
+           . " €</li>";
     }
 }
 
-// Função para calcular o total do carrinho
 function calcularTotal() {
     $total = 0;
     if (isset($_SESSION['carrinho'])) {
@@ -28,36 +27,17 @@ function calcularTotal() {
     return $total;
 }
 
-// Função para gerar a lista do carrinho em HTML
-function listarCarrinho() {
-    if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho'])) {
-        echo "<li>O carrinho está vazio.</li>";
-        return;
-    }
-
-    foreach ($_SESSION['carrinho'] as $nome => $item) {
-        echo "<li>{$nome} - {$item['quantidade']} x " . number_format($item['preco'], 2) . " € = " . number_format($item['preco'] * $item['quantidade'], 2) . " €</li>";
-    }
-}
-
-// Função para finalizar compra
 function finalizarCompra() {
     if (isset($_POST['finalizar'])) {
         if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho'])) {
             echo "<script>alert('O carrinho está vazio!');</script>";
         } else {
             $_SESSION['carrinho'] = [];
-            echo "<script>alert('Compra finalizada com sucesso!'); window.location='".$_SERVER['PHP_SELF']."';</script>";
+            echo "<script>alert('Compra finalizada com sucesso!');</script>";
         }
     }
 }
 
-// Adicionar produto via GET (exemplo: ?add=Jogo1&preco=29.99)
-if (isset($_GET['add']) && isset($_GET['preco'])) {
-    $nome = htmlspecialchars($_GET['add']);
-    $preco = floatval($_GET['preco']);
-    adicionarAoCarrinho($nome, $preco);
-}
 
 // Finalizar compra
 finalizarCompra();
@@ -119,5 +99,6 @@ finalizarCompra();
 </footer>
 </body>
 </html>
+
 
 
