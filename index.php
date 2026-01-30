@@ -245,7 +245,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <section class="section">
     <h2>Jogos em Destaque</h2>
     <div class="games">
-      <!-- jogos aqui, igual ao seu código -->
+      <h2>Jogos em Destaque</h2>
+    <div class="games">
+      <div class="game">
+        <img src="ApanhaaMaca.JPG" alt="Apanha a Maçã">
+        <h3>Apanha a Maçã</h3>
+        <p>Preço: 10.00 €</p>
+		<video width="200" height="140" controls>
+          <source src="ApanhaaMaca.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="game">
+        <img src="battlefield6.JPG" alt="Battlefield 6">
+        <h3>Battlefield 6</h3>
+        <p>Preço: 60.19 €</p>
+        <video width="200" height="140" controls>
+          <source src="Battlefield_6.MP4" type="video/mp4">
+        </video>
+    </div>
+	<section class="games">
+	<div class="game">
+		<img src="ApanhaaBoladeBasket.JPG" alt="Apanha a Bola de Basket">
+		<h3>Apanha a Bola de Basket</h3>
+		<p>Preço: 10.00 €</p>
+		<video width="200" height="140" controls>
+          <source src="ApanhaaBoladeBasket.mp4" type="video/mp4">
+        </video>
+	</div>
+	<div class="game">
+		<img src="nba-2k26.JPG" alt="NBA 2K26">
+		<h3>NBA 2K26</h3>
+		<p>Preço: 53.99 €</p>
+			<video width="200" height="140" controls>
+			<source src="nba-2k26.MP4" type="video/mp4">
+			<source src="movie.ogg" type="video/ogg">
+			Your browser does not support the video tag.
+		</video>
+	</div>
+</section>
     </div>
   </section>
 
@@ -273,4 +310,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 </body>
 </html>
+
 
