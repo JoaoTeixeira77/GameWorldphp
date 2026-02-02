@@ -277,7 +277,7 @@ footer p {
   <h1>O Meu Carrinho</h1>
   <nav>
     <a href="Carrinho.php">Carrinho</a>
-	<a href="index.php">Início</a>
+	<a href="index.html">Início</a>
   </nav>
 </header>
 
@@ -315,6 +315,7 @@ footer p {
 </footer>
 </body>
 </html>
+
 
 
 
