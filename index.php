@@ -226,7 +226,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="container">
       <h1>GameWorld</h1>
       <nav>
-        <a href="index.php">Início</a>
+        <a href="index.html">Início</a>
         <a href="Catálogo.php">Catálogo</a>
         <a href="#contato">Contactos</a>
         <a href="Minha_Conta.php">Minha Conta</a>
@@ -310,5 +310,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 </body>
 </html>
+
 
 
