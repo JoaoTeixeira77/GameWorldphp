@@ -104,7 +104,7 @@ button:hover {
     <h1>Minha Conta</h1>
     <nav>
         <a href="Minha_Conta.php">Minha Conta</a>
-		<a href="index.php">Início</a>
+		<a href="index.html">Início</a>
     </nav>
 </header>
 
@@ -172,4 +172,5 @@ button:hover {
 </script>
 </body>
 </html>
+
 
